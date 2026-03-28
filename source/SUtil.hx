@@ -11,6 +11,7 @@ import sys.io.*;
 import android.Tools;
 import android.callback.CallBack;
 #end
+using StringTools;
 @:structInit class SaveVariables {
   #if android
 	public var storageType:String = "EXTERNAL";

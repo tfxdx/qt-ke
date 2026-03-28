@@ -9,6 +9,7 @@ import lime.utils.Assets as LimeAssets;
 import openfl.utils.Assets as OpenFLAssets;
 import openfl.utils.ByteArray;
 import haxe.io.Path;
+import flixel.FlxSprite;
 import flixel.ui.FlxBar;
 import flixel.ui.FlxBar.FlxBarFillDirection;
 import lime.system.ThreadPool;

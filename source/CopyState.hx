@@ -9,12 +9,16 @@ import lime.utils.Assets as LimeAssets;
 import openfl.utils.Assets as OpenFLAssets;
 import openfl.utils.ByteArray;
 import haxe.io.Path;
+import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.text.FlxText;
+import flixel.util.FlxColor;
 import flixel.ui.FlxBar;
 import flixel.ui.FlxBar.FlxBarFillDirection;
 import lime.system.ThreadPool;
 import flixel.addons.util.FlxAsyncLoop;
+
+using StringTools;
 
 class CopyState extends MusicBeatState
 {

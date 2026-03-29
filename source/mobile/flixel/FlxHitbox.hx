@@ -9,6 +9,7 @@ import flixel.FlxG;
 import openfl.display.BitmapData;
 import openfl.display.Shape;
 import flixel.util.FlxDestroyUtil;
+import flixel.tweens.FlxTween;
 
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;

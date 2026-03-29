@@ -124,9 +124,11 @@ class MainMenuState extends MusicBeatState
 
 		changeItem();
 
-		
-
 		super.create();
+
+		#if mobile
+        addVirtualPad(UP_DOWN,A_B);
+        #end
 	}
 
 	var selectedSomethin:Bool = false;

@@ -9,7 +9,7 @@ import flixel.input.IFlxInput;
 import flixel.input.touch.FlxTouch;
 import flixel.math.FlxPoint;
 import flixel.util.FlxDestroyUtil.IFlxDestroyable;
-import flixel.system.Sound;
+import flixel.system.FlxSound;
 
 /**
  * A simple button class that calls a function when clicked by the touch.

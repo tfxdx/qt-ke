@@ -13,6 +13,7 @@ import flixel.addons.ui.FlxUIState;
 import flixel.math.FlxRect;
 import flixel.util.FlxTimer;
 import flixel.FlxCamera;
+import flixel.addons.transition.FlxTransitionableState;
 
 class MusicBeatState extends FlxUIState
 {

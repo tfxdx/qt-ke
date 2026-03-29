@@ -11,7 +11,16 @@ import openfl.display.Shape;
 import flixel.util.FlxDestroyUtil;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+@:structInit class SaveVariables {
+  #if android
+	public var controlsAlpha:Float = 0.7;
+	public var hideHitboxHints:Bool = false;
+	#end
+}
 
+class ClientPrefs {
+  public static var data:SaveVariables = {};
+}
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
 

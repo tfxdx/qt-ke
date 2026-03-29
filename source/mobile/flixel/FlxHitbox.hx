@@ -11,6 +11,7 @@ import openfl.display.Shape;
 import flixel.util.FlxDestroyUtil;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
+import flixel.tweens.FlxEase;
 @:structInit class SaveVariables {
   #if android
 	public var controlsAlpha:Float = 0.7;

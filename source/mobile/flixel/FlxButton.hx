@@ -12,6 +12,7 @@ import flixel.util.FlxDestroyUtil.IFlxDestroyable;
 import flixel.system.FlxSound;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
+import flixel.text.FlxText;
 /**
  * A simple button class that calls a function when clicked by the touch.
  */

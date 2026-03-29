@@ -23,7 +23,7 @@ class MusicBeatState extends FlxUIState
 	private var controls(get, never):Controls;
 
 	
-	#if android
+	#if mobile
 	var _hitbox:FlxHitbox;
 	var _virtualpad:FlxVirtualPad;
 

@@ -4766,9 +4766,9 @@ class PlayState extends MusicBeatState
 		}
 		#end
 		#if mobile
-						var poop:Bool = !hitboxHold[n.noteData];
+						var poop:Bool = !hitboxHold[coolNote.noteData];
 						if (!poop)
-						    goodNoteHit(n);
+						    goodNoteHit(coolNote);
 						#end
 			#if mobile
 		for (i in 0..._hitbox.array.length) {

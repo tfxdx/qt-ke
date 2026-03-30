@@ -4792,7 +4792,7 @@ class PlayState extends MusicBeatState
 									for (shit in 0..._hitbox.array.length)
 									{
 										if (controlArray[ignoreList[shit]])
-											 _hitbox.array = true;
+											 inIgnoreList = true;
 									}
 								}
 							}

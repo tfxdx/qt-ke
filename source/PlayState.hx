@@ -4749,35 +4749,6 @@ class PlayState extends MusicBeatState
 		}
 		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
-        #if mobile
-		var hitboxHold:Array<Bool> = [];
-		#end
-        #if mobile
-		for (i in 0..._hitbox.array.length) {
-			hitboxHold.push(_hitbox.array[i].pressed);
-		}
-		#end
-		#if mobile
-		    for (i in 0..._hitbox.array.length) {
-			if (_hitbox.array[i].justPressed && strumsBlocked[i] != true)
-			{
-				 keyPressed(i);
-			}
-		}
-		#end
-		#if mobile
-						var poop:Bool = !hitboxHold[coolNote.noteData];
-						if (!poop)
-						    goodNoteHit(coolNote);
-						#end
-			#if mobile
-		for (i in 0..._hitbox.array.length) {
-			if (_hitbox.array[i].justReleased || strumsBlocked[i] == true)
-			{
-				keyReleased(i);
-			}
-		}
-		#end
 		// FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
 			{
@@ -4818,10 +4789,10 @@ class PlayState extends MusicBeatState
 								else
 								{
 									var inIgnoreList:Bool = false;
-									for (shit in 0...inIgnoreList.length)
+									for (shit in 0...ignoreList.length)
 									{
 										if (controlArray[ignoreList[shit]])
-											 inIgnoreList = true;
+											inIgnoreList = true;
 									}
 								}
 							}

@@ -1,4 +1,4 @@
-name: Build
+name: Build xd
 on: push
 jobs:
   build:

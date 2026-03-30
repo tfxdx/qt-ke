@@ -1775,10 +1775,7 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.cameras = [camHUD];
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
-		
-		addHitbox(3);
-		_hitbox.visible = false;
-		
+
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -2025,11 +2022,8 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
-		#if mobile
-		_hitbox.visible = true;
-		#end
 		inCutscene = false;
-		
+
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 		if(curStage == "nightmare"){
@@ -4170,9 +4164,6 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
-		#if mobile
-		_hitbox.visible = false;
-		#end
 		if (!loadRep)
 			rep.SaveReplay();
 
@@ -4749,7 +4740,7 @@ class PlayState extends MusicBeatState
 			if (leftR)
 				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "left"});
 		}
-		var hitboxHold:Array<Bool> = [leftP, downP, upP, rightP];
+		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
@@ -4786,14 +4777,14 @@ class PlayState extends MusicBeatState
 							for (coolNote in possibleNotes)
 							{
 
-								if (hitboxHold[coolNote.noteData])
+								if (controlArray[coolNote.noteData])
 									goodNoteHit(coolNote);
 								else
 								{
 									var inIgnoreList:Bool = false;
 									for (shit in 0...ignoreList.length)
 									{
-										if (hitboxHold[ignoreList[shit]])
+										if (controlArray[ignoreList[shit]])
 											inIgnoreList = true;
 									}
 								}
@@ -4813,10 +4804,10 @@ class PlayState extends MusicBeatState
 									trace('force note hit');
 								}
 								else
-									noteCheck(hitboxHold, daNote);
+									noteCheck(controlArray, daNote);
 							}
 							else
-								noteCheck( hitboxHold, daNote);
+								noteCheck(controlArray, daNote);
 						}
 						else
 						{
@@ -4840,10 +4831,10 @@ class PlayState extends MusicBeatState
 											trace('force note hit');
 										}
 										else
-											noteCheck(hitboxHold, daNote);
+											noteCheck(controlArray, daNote);
 									}
 								else
-									noteCheck(hitboxHold, coolNote);
+									noteCheck(controlArray, coolNote);
 							}
 						}
 					}
@@ -4861,13 +4852,13 @@ class PlayState extends MusicBeatState
 								trace('force note hit');
 							}
 							else
-								noteCheck(hitboxHold, daNote);
+								noteCheck(controlArray, daNote);
 						}
 						else
-							noteCheck( hitboxHold, daNote);
+							noteCheck(controlArray, daNote);
 					}
 					/* 
-						if (hitboxHold[daNote.noteData])
+						if (controlArray[daNote.noteData])
 							goodNoteHit(daNote);
 					 */
 					// trace(daNote.noteData);
@@ -5150,7 +5141,7 @@ class PlayState extends MusicBeatState
 		}
 
 
-	function _hitbox(note:Note):Int
+	function getKeyPresses(note:Note):Int
 	{
 		var possibleNotes:Array<Note> = []; // copypasted but you already know that
 
@@ -5172,7 +5163,7 @@ class PlayState extends MusicBeatState
 
 	var etternaModeScore:Int = 0;
 
-	function noteCheck(hitboxHold:Array<Bool>, note:Note):Void // sorry lol
+	function noteCheck(controlArray:Array<Bool>, note:Note):Void // sorry lol
 		{
 			var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition);
 
@@ -5187,9 +5178,9 @@ class PlayState extends MusicBeatState
 
 			if (loadRep)
 			{
-				if (hitboxHold[note.noteData])
+				if (controlArray[note.noteData])
 					goodNoteHit(note);
-				else if (rep.replay.keyPresses.length > repPresses && !hitboxHold[note.noteData])
+				else if (rep.replay.keyPresses.length > repPresses && !controlArray[note.noteData])
 				{
 					if (NearlyEquals(note.strumTime,rep.replay.keyPresses[repPresses].time, 4))
 					{
@@ -5197,20 +5188,20 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
-			else if (hitboxHold[note.noteData])
+			else if (controlArray[note.noteData])
 				{
-					for (b in hitboxHold) {
+					for (b in controlArray) {
 						if (b)
 							mashing++;
 					}
 
 					// ANTI MASH CODE FOR THE BOYS
 
-					if (mashing <= _hitbox(note) && mashViolations < 2)
+					if (mashing <= getKeyPresses(note) && mashViolations < 2)
 					{
 						mashViolations++;
 						
-						goodNoteHit(note, (mashing <= _hitbox(note)));
+						goodNoteHit(note, (mashing <= getKeyPresses(note)));
 					}
 					else
 					{

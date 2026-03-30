@@ -12,16 +12,7 @@ import flixel.util.FlxDestroyUtil;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
-@:structInit class SaveVariables {
-  #if android
-	public var controlsAlpha:Float = 0.7;
-	public var hideHitboxHints:Bool = false;
-	#end
-}
 
-class ClientPrefs {
-  public static var data:SaveVariables = {};
-}
 class FlxHitbox extends FlxSpriteGroup {
 	public var hitbox:FlxSpriteGroup;
 
@@ -60,48 +51,6 @@ class FlxHitbox extends FlxSpriteGroup {
 		button.updateHitbox();
 		button.alpha = 0.00001;
 
-		if (!ClientPrefs.data.hideHitboxHints)
-		{
-			button.onDown.callback = function()
-			{
-				if (hintTween != null)
-					hintTween.cancel();
-
-				hintTween = FlxTween.tween(button, {alpha: ClientPrefs.data.controlsAlpha}, ClientPrefs.data.controlsAlpha / 100, {
-					ease: FlxEase.circInOut,
-					onComplete: function(twn:FlxTween)
-					{
-						hintTween = null;
-					}
-				});
-			}
-			button.onUp.callback = function()
-			{
-				if (hintTween != null)
-					hintTween.cancel();
-
-				hintTween = FlxTween.tween(button, {alpha: 0.00001}, ClientPrefs.data.controlsAlpha / 10, {
-					ease: FlxEase.circInOut,
-					onComplete: function(twn:FlxTween)
-					{
-						hintTween = null;
-					}
-				});
-			}
-			button.onOut.callback = function()
-			{
-				if (hintTween != null)
-					hintTween.cancel();
-
-				hintTween = FlxTween.tween(button, {alpha: 0.00001}, ClientPrefs.data.controlsAlpha / 10, {
-					ease: FlxEase.circInOut,
-					onComplete: function(twn:FlxTween)
-					{
-						hintTween = null;
-					}
-				});
-			}
-		}
 		#if FLX_DEBUG
 		hint.ignoreDrawDebug = true;
 		#end
@@ -117,9 +66,6 @@ class FlxHitbox extends FlxSpriteGroup {
 	}
 	function createHintGraphic(Width:Int, Height:Int):BitmapData
 	{
-		var guh = ClientPrefs.data.controlsAlpha;
-		if (guh >= 0.9)
-			guh = ClientPrefs.data.controlsAlpha - 0.07;
 		var shape:Shape = new Shape();
 		shape.graphics.beginFill(0xFFFFFF);
 		shape.graphics.lineStyle(3, 0xFFFFFF, 1);

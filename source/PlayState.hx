@@ -4749,7 +4749,7 @@ class PlayState extends MusicBeatState
 			if (leftR)
 				rep.replay.keyReleases.push({time: Conductor.songPosition, key: "left"});
 		}
-		var controlArray:Array<Bool> = [leftP, downP, upP, rightP];
+		var #if !mobile controlArray #end #if mobile hitboxHold #end:Array<Bool> = [leftP, downP, upP, rightP];
 
 		// FlxG.watch.addQuick('asdfa', upP);
 		if ((upP || rightP || downP || leftP) && !boyfriend.stunned && generatedMusic)
@@ -4786,14 +4786,14 @@ class PlayState extends MusicBeatState
 							for (coolNote in possibleNotes)
 							{
 
-								if (controlArray[coolNote.noteData])
+								if (#if !mobile controlArray #end #if mobile hitboxHold #end[coolNote.noteData])
 									goodNoteHit(coolNote);
 								else
 								{
 									var inIgnoreList:Bool = false;
 									for (shit in 0...ignoreList.length)
 									{
-										if (controlArray[ignoreList[shit]])
+										if (#if !mobile controlArray #end #if mobile hitboxHold #end[ignoreList[shit]])
 											inIgnoreList = true;
 									}
 								}
@@ -4813,10 +4813,10 @@ class PlayState extends MusicBeatState
 									trace('force note hit');
 								}
 								else
-									noteCheck(controlArray, daNote);
+									noteCheck(#if !mobile controlArray #end #if mobile hitboxHold #end, daNote);
 							}
 							else
-								noteCheck(controlArray, daNote);
+								noteCheck( #if !mobile controlArray #end #if mobile hitboxHold #end, daNote);
 						}
 						else
 						{
@@ -4840,10 +4840,10 @@ class PlayState extends MusicBeatState
 											trace('force note hit');
 										}
 										else
-											noteCheck(controlArray, daNote);
+											noteCheck(#if !mobile controlArray #end #if mobile hitboxHold #end, daNote);
 									}
 								else
-									noteCheck(controlArray, coolNote);
+									noteCheck(#if !mobile controlArray #end #if mobile hitboxHold #end, coolNote);
 							}
 						}
 					}
@@ -4861,13 +4861,13 @@ class PlayState extends MusicBeatState
 								trace('force note hit');
 							}
 							else
-								noteCheck(controlArray, daNote);
+								noteCheck(#if !mobile controlArray #end #if mobile hitboxHold #end, daNote);
 						}
 						else
-							noteCheck(controlArray, daNote);
+							noteCheck( #if !mobile controlArray #end #if mobile hitboxHold #end, daNote);
 					}
 					/* 
-						if (controlArray[daNote.noteData])
+						if (#if !mobile controlArray #end #if mobile hitboxHold #end[daNote.noteData])
 							goodNoteHit(daNote);
 					 */
 					// trace(daNote.noteData);
@@ -5150,7 +5150,7 @@ class PlayState extends MusicBeatState
 		}
 
 
-	function getKeyPresses(note:Note):Int
+	function #f !mobile getKeyPresses #end #if mobile _hitbox #end(note:Note):Int
 	{
 		var possibleNotes:Array<Note> = []; // copypasted but you already know that
 
@@ -5172,7 +5172,7 @@ class PlayState extends MusicBeatState
 
 	var etternaModeScore:Int = 0;
 
-	function noteCheck(controlArray:Array<Bool>, note:Note):Void // sorry lol
+	function noteCheck(#if !mobile controlArray #end #if mobile hitboxHold #end:Array<Bool>, note:Note):Void // sorry lol
 		{
 			var noteDiff:Float = Math.abs(note.strumTime - Conductor.songPosition);
 
@@ -5187,9 +5187,9 @@ class PlayState extends MusicBeatState
 
 			if (loadRep)
 			{
-				if (controlArray[note.noteData])
+				if (#if !mobile controlArray #end #if mobile hitboxHold #end[note.noteData])
 					goodNoteHit(note);
-				else if (rep.replay.keyPresses.length > repPresses && !controlArray[note.noteData])
+				else if (rep.replay.keyPresses.length > repPresses && #if !mobile !controlArray #end #if mobile !hitboxHold #end[note.noteData])
 				{
 					if (NearlyEquals(note.strumTime,rep.replay.keyPresses[repPresses].time, 4))
 					{
@@ -5197,20 +5197,20 @@ class PlayState extends MusicBeatState
 					}
 				}
 			}
-			else if (controlArray[note.noteData])
+			else if (#if !mobile controlArray #end #if mobile hitboxHold #end[note.noteData])
 				{
-					for (b in controlArray) {
+					for (b in #if !mobile controlArray #end #if mobile hitboxHold #end) {
 						if (b)
 							mashing++;
 					}
 
 					// ANTI MASH CODE FOR THE BOYS
 
-					if (mashing <= getKeyPresses(note) && mashViolations < 2)
+					if (mashing <= #if !mobile getKeyPresses #end #if mobile _hitbox #end(note) && mashViolations < 2)
 					{
 						mashViolations++;
 						
-						goodNoteHit(note, (mashing <= getKeyPresses(note)));
+						goodNoteHit(note, (mashing <= #if !mobile getKeyPresses #end #if mobile _hitbox #end(note)));
 					}
 					else
 					{

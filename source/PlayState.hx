@@ -1775,7 +1775,10 @@ class PlayState extends MusicBeatState
 		kadeEngineWatermark.cameras = [camHUD];
 		if (loadRep)
 			replayTxt.cameras = [camHUD];
-
+		
+		addHitbox(3);
+		_hitbox.visible = false;
+		
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -2022,8 +2025,11 @@ class PlayState extends MusicBeatState
 
 	function startCountdown():Void
 	{
+		#if mobile
+		_hitbox.visible = true;
+		#end
 		inCutscene = false;
-
+		
 		generateStaticArrows(0);
 		generateStaticArrows(1);
 		if(curStage == "nightmare"){
@@ -4164,6 +4170,9 @@ class PlayState extends MusicBeatState
 
 	function endSong():Void
 	{
+		#if mobile
+		_hitbox.visible = false;
+		#end
 		if (!loadRep)
 			rep.SaveReplay();
 
@@ -4807,7 +4816,7 @@ class PlayState extends MusicBeatState
 									noteCheck(controlArray, daNote);
 							}
 							else
-								noteCheck(controlArray, daNote);
+								noteCheck( controlArray, daNote);
 						}
 						else
 						{
@@ -4855,7 +4864,7 @@ class PlayState extends MusicBeatState
 								noteCheck(controlArray, daNote);
 						}
 						else
-							noteCheck(controlArray, daNote);
+							noteCheck( controlArray, daNote);
 					}
 					/* 
 						if (controlArray[daNote.noteData])
